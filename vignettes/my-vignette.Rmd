@@ -1,0 +1,52 @@
+---
+title: "The Code Ran on the Linux Server"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+#library(QPcleaneR)
+
+library(furrr)
+
+# Choose the number of cores for parallel processing
+n_cores <- 20
+```
+
+
+```{r}
+#set the paralel for furrr
+furrr::plan(multisession, 
+            workers = n_cores)
+```
+
+
+This lines create a fuction that is both 
+
+```{r}
+# a raw dataset that has establishment, worker and firm level info.
+# for all years in the indicated directories.
+df <- qp_assemble(path_worker_dir = "../1_raw_data/010_workers",
+                  path_firm_dir = "../1_raw_data/020_firms",
+                  path_est_fir = "../1_raw_data/030_establishment")
+```
+
+
+Save the RAW complete data.
+
+```{r}
+df_raw %>% data.table::fwrite("../2_data/030_final_versions/df_raw_qp.csv")
+```
+
+
+

@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-A packege that automatically binds and cleans Quadros de Pessoal.
+A packege that automatically binds and cleans Quadros de Pessoal. Future work: join with SCIE.
 
 ## Installation
 

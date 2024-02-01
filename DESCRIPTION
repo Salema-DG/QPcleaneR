@@ -1,12 +1,26 @@
 Package: QPcleaneR
-Title: What the Package Does (One Line, Title Case)
+Title: Clean and Bind Quadros de Pessoal
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Miguel", "Salema", , "miguelsalema1999@gmail.com", role = c("aut", "cre"))
+Description: This package helps create a worker-level QP with establishment and firm-level information. 
+    The firm level information contains the basic from QP, detailed finantial information from SCIE and exports/imports from CI. 
+    It further creates an auxiliary firm-level document with secondary information at the firm-level.
+License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+Imports: 
+    dplyr,
+    furrr,
+    haven,
+    magrittr,
+    purrr,
+    readxl,
+    rlang,
+    tidyr,
+    tidyselect
