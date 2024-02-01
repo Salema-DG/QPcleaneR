@@ -41,7 +41,7 @@ qp_crosswalks <- function(data) {
   # Only after 2010, we have the CAE to the 4th digit.
   # Keep the first 3 digits only, for consistency.
   data %<>%
-    dplyr::mutate(cae_3 = cae_3 %>% as.integer() %>% dplyr::na_if(0)) %>%
+    dplyr::mutate(cae_3 = cae_3 %>% as.integer() %>% tidyr::na_if(0)) %>%
     dplyr::mutate(cae_3 = dplyr::case_when(
       cae_3 > 1000  ~ (cae_3 %/% 10),
       TRUE ~ cae_3
@@ -50,7 +50,7 @@ qp_crosswalks <- function(data) {
   # year founded has the month for some observations (in the format yyyymm).
   # keep only the year
   data %<>%
-    dplyr::mutate(year_funded = year_funded %>% as.integer() %>% dplyr::na_if(0)) %>%
+    dplyr::mutate(year_funded = year_funded %>% as.integer() %>% tidyr::na_if(0)) %>%
     dplyr::mutate(year_founded = dplyr::case_when(
       year_funded < 300000 & year_funded > 100000 ~ (year_funded%/%100),
       TRUE ~ year_funded
