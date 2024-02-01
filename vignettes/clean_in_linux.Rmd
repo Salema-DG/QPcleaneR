@@ -1,5 +1,5 @@
 ---
-title: "The Code Ran on the Linux Server"
+title: "Clean QP on the Linux Server"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{my-vignette}
@@ -19,6 +19,7 @@ knitr::opts_chunk$set(
 #library(QPcleaneR)
 
 library(furrr)
+library(data.table)
 
 # Choose the number of cores for parallel processing
 n_cores <- 20
@@ -48,6 +49,29 @@ Save the RAW complete data.
 ```{r}
 df_raw %>% data.table::fwrite("../2_data/030_final_versions/df_raw_qp.csv")
 ```
+
+# The crosswalks: make it consisntes
+
+Load the raw dataset:
+
+```{r}
+df <- data.table::fread("../2_data/030_final_versions/df_raw_qp.csv") %>% as_tibble()
+```
+
+
+```{r}
+df %<>% qp_crosswalks()
+```
+
+This function applyes cahnges to:
++ 
+
+
+
+
+
+
+
 
 
 

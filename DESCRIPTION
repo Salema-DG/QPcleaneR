@@ -16,6 +16,7 @@ Suggests:
 VignetteBuilder: knitr
 Imports: 
     dplyr,
+    forcats,
     furrr,
     haven,
     magrittr,
