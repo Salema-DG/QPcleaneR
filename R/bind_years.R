@@ -41,7 +41,7 @@ bind_years <- function(data) {
 
     }) %>%
     #bind all years into a single dataset
-    purrr::reduce(bind_rows)
+    purrr::reduce(dplyr::bind_rows)
 
   return(df_raw)
 

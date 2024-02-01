@@ -23,7 +23,7 @@
 #'
 qp_assemble <- function(path_worker_dir,
                         path_firm_dir,
-                        path_est_fir) {
+                        path_est_dir) {
 
   #-------------------------------------------------------------------#
   # WARNING!                                                          #

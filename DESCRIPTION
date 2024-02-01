@@ -22,5 +22,6 @@ Imports:
     purrr,
     readxl,
     rlang,
+    stringr,
     tidyr,
     tidyselect
