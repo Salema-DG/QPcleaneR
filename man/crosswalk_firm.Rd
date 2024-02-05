@@ -24,6 +24,6 @@ To solve Problem 1, I build an algorithm that:
 \item Get all the firms that exist from 2011 to 2020;
 \item Keep only the ones that did not exist in 2010;
 \item Keep only the ones that existed before 2010;
-\item Give a new ID to this firms, which is $NPC\_FIC \times 100$ (adding 2 0's).
+\item Give a new ID to this firms, which is NPC_FIC * 100 (adding 2 0's).
 }
 }

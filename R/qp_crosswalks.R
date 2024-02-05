@@ -9,6 +9,8 @@
 #' (4) nut_2_firm;
 #' (5) nut_2_est;
 #' (6) firm;
+#' (7) occupation;
+#' (8) Sector;
 #'
 #' The function is commented with each of the problems.
 #'
@@ -74,6 +76,30 @@ qp_crosswalks <- function(data) {
   # apply the firm crosswalk
   data %<>%
     crosswalk_firm()
+
+  #-----------------------#
+  # Occupation crosswalks #
+  #-----------------------#
+
+  #turn the 4d original occup varaible into a 3d
+  data %<>%
+    mutate(occup_3d = as.numeric(occup_4d)%/%10)
+
+  data %<>%
+    crosswalk_occup(year_column = year,
+                    original_occup_3d = occup_3d)
+
+  #-------------------#
+  # Sector crosswalks #
+  #-------------------#
+
+  data %<>%
+    crosswalk_sector(year = year,
+                     original_3d_cae = cae_3)
+
+  # i cannot apply it to the establishment sector (cae_3_est) not IRCT sector,
+  # because of the level of agreegation after 2010. It needs further cleaning.
+
 
 
   # return ####

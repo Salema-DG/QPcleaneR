@@ -20,6 +20,8 @@ Things that are done, include the following the changes to the variables:
 (4) nut_2_firm;
 (5) nut_2_est;
 (6) firm;
+(7) occupation;
+(8) Sector;
 
 The function is commented with each of the problems.
 }
