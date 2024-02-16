@@ -45,7 +45,7 @@ crosswalk_occup <- function(data,
   # This is also called data masking
 
   by <- dplyr::join_by({{ original_occup_3d }} == original_occup,
-                       between({{ year_column }}, start, end))
+                       dplyr::between({{ year_column }}, start, end))
 
   # apply the crosswalk
   data %<>%

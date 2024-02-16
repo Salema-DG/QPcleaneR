@@ -22,12 +22,12 @@ delete_worker_duplicates <- function(data,
 
   # turn data into a lazy_dt, to use dtplyr
   lazy_dt_data <- data %>%
-    lazy_dt()
+    dtplyr::lazy_dt()
 
   # identify the duplicates
   df_freq <- lazy_dt_data %>%
-    count(worker, year) %>%
-    mutate(w_g=case_when(
+    dplyr::count(worker, year) %>%
+    dplyr::mutate(w_g= dplyr::case_when(
       n > 1 ~ 1,
       n == 1 ~ 0
     ))
@@ -41,14 +41,14 @@ delete_worker_duplicates <- function(data,
   if (type == "highest") {
 
     data <- lazy_dt_data %>%
-      group_by(worker, year) %>%
-      slice_max(base_wage,
+      dplyr::group_by(worker, year) %>%
+      dplyr::slice_max(base_wage,
                 n=1) %>%
-      slice_max(normal_hours,
+      dplyr::slice_max(normal_hours,
                 n=1) %>%
-      ungroup() %>%
-      distinct(worker, year, normal_hours, base_wage, .keep_all=TRUE) %>%
-      as_tibble()
+      dplyr::ungroup() %>%
+      dplyr::distinct(worker, year, normal_hours, base_wage, .keep_all=TRUE) %>%
+      tibble::as_tibble()
 
     return(data)
   }

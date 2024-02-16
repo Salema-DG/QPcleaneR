@@ -11,6 +11,8 @@
 #' (6) firm;
 #' (7) occupation;
 #' (8) Sector;
+#' (9) Education;
+#' (10) Establishment;
 #'
 #' The function is commented with each of the problems.
 #'
@@ -43,7 +45,7 @@ qp_crosswalks <- function(data) {
   # Only after 2010, we have the CAE to the 4th digit.
   # Keep the first 3 digits only, for consistency.
   data %<>%
-    dplyr::mutate(cae_3 = cae_3 %>% as.integer() %>% tidyr::na_if(0)) %>%
+    dplyr::mutate(cae_3 = cae_3 %>% as.integer() %>% dplyr::na_if(0)) %>%
     dplyr::mutate(cae_3 = dplyr::case_when(
       cae_3 > 1000  ~ (cae_3 %/% 10),
       TRUE ~ cae_3
@@ -83,7 +85,7 @@ qp_crosswalks <- function(data) {
 
   #turn the 4d original occup varaible into a 3d
   data %<>%
-    mutate(occup_3d = as.numeric(occup_4d)%/%10)
+    dplyr::mutate(occup_3d = as.numeric(occup_4d)%/%10)
 
   data %<>%
     crosswalk_occup(year_column = year,
@@ -98,8 +100,21 @@ qp_crosswalks <- function(data) {
                      original_3d_cae = cae_3)
 
   # i cannot apply it to the establishment sector (cae_3_est) not IRCT sector,
-  # because of the level of agreegation after 2010. It needs further cleaning.
+  # because of the level of aggregation after 2010. It needs further cleaning.
 
+  #----------------------#
+  # Education Crosswalks #
+  #----------------------#
+
+  data %<>%
+    crosswalk_educ()
+
+  #--------------------------#
+  # Establishment Crosswalks #
+  #--------------------------#
+
+  data %<>%
+    crosswalk_establishment()
 
 
   # return ####

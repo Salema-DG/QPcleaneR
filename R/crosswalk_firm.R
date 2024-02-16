@@ -51,7 +51,7 @@ crosswalk_firm <- function(data) {
     firm_id_valid != "correct" & is.na(nuemp) & is.na(emp_id) ~ NA,
     TRUE ~ firm
   )) %>%
-    dplyr::drop_na(firm) # However, there are no NAs left to delete
+    tidyr::drop_na(firm) # However, there are no NAs left to delete
 
 
   #-----------#

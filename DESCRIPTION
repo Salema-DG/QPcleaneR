@@ -16,14 +16,17 @@ Suggests:
 VignetteBuilder: knitr
 Imports: 
     dplyr,
+    dtplyr,
     forcats,
     furrr,
     haven,
     magrittr,
     purrr,
+    QPanalyseR,
     readxl,
     rlang,
     stringr,
+    tibble,
     tidyr,
     tidyselect
 Depends: 

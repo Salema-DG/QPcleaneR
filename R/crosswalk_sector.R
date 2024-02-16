@@ -69,15 +69,15 @@ crosswalk_sector <- function(data,
                              new_variable = sector) {
 
   # DEFUSE (return without evaluate) AND INJECT
-  data %<>% mutate(ano = {{ year }},
+  data %<>% dplyr::mutate(ano = {{ year }},
                    sector_3d = {{ original_3d_cae }} )
 
   # create 1d and 2d cae variables
-  data %<>% mutate(sector_1d = {{ original_3d_cae }} %>% str_sub(1, 1),
-                   sector_2d = {{ original_3d_cae }} %>% str_sub(1, 2))
+  data %<>% dplyr::mutate(sector_1d = {{ original_3d_cae }} %>% stringr::str_sub(1, 1),
+                   sector_2d = {{ original_3d_cae }} %>% stringr::str_sub(1, 2))
 
   data %<>%
-    mutate( {{ new_variable }} := case_when( # if I do = , and not :=, I cannot set the name dynamically
+    dplyr::mutate( {{ new_variable }} := dplyr::case_when( # if I do = , and not :=, I cannot set the name dynamically
 
       # 1st case, for CAE Rev 3, from 2004 onwards:
       ano>=2007 & (sector_2d == "01" | sector_2d == "02") ~ 1,
@@ -181,7 +181,7 @@ crosswalk_sector <- function(data,
     ))
 
   # eliminate useless columns
-  data %<>% select(!c(ano,
+  data %<>% dplyr::select(!c(ano,
                       sector_3d,
                       sector_2d,
                       sector_1d))

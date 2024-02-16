@@ -22,6 +22,8 @@ Things that are done, include the following the changes to the variables:
 (6) firm;
 (7) occupation;
 (8) Sector;
+(9) Education;
+(10) Establishment;
 
 The function is commented with each of the problems.
 }

@@ -50,6 +50,14 @@ Save the RAW complete data.
 df_raw %>% data.table::fwrite("../2_data/030_final_versions/df_raw_qp.csv")
 ```
 
+
+# Delete Worker Duplicates
+
+```{r}
+df %<>% delete_worker_duplicates(type = "highest")
+```
+
+
 # The crosswalks: make it consisntes
 
 Load the raw dataset:
@@ -63,10 +71,28 @@ df <- data.table::fread("../2_data/030_final_versions/df_raw_qp.csv") %>% as_tib
 df %<>% qp_crosswalks()
 ```
 
-This function applyes cahnges to:
-+ 
+This function changes:
+1. worker, delete NAs and put all NA's in 1985;
+1. cae_3;
+1. year founded;
+1. nut_2_firm;
+1. nut_2_est;
+1. firm;
+1. occupation;
+1. Sector;
+1. Education;
+10; Establishment;
 
 
+
+# save
+
+```{r}
+df %>% saveRDS("../2_data/030_final_versions/qp+crosswalks.rds")
+```
+
+
+# Clean
 
 
 
