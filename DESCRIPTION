@@ -22,7 +22,6 @@ Imports:
     haven,
     magrittr,
     purrr,
-    QPanalyseR,
     readxl,
     rlang,
     stringr,
