@@ -42,6 +42,9 @@ qp_crosswalks <- function(data) {
   #worker ID should be an integer
   data$worker %<>% as.integer()
 
+  # worker ID cannot be this small
+  data %<>% dplyr::filter(worker > 100)
+
   # Only after 2010, we have the CAE to the 4th digit.
   # Keep the first 3 digits only, for consistency.
   data %<>%
