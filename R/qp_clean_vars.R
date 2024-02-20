@@ -22,12 +22,16 @@
 #' @param df_cpi A dataset with cpi data (montly).
 #' @param df_mw A dataset with the values for yearly minimum wage
 #'
+#' @export
+#'
 #' @return A cleaned QP dataset.
 #'
 
 qp_clean_vars <- function(data,
-                          df_cpi = data("INE_month_IHPC"), # a var tem de ser cpi
-                          df_mw = data("minimum_wage")) {
+                          df_cpi = data("INE_month_IHPC",
+                                        envir = environment()),
+                          df_mw = data("minimum_wage",
+                                       envir = environment())) {
 
   #----------------------------------------------------------------------------#
   # Male ####
@@ -73,7 +77,7 @@ qp_clean_vars <- function(data,
   #add cpi to QP:
   data %<>%
     dplyr::left_join(df_cpi %>%
-                select(year, cpi),
+                dplyr::select(year, cpi),
               by = "year")
 
   #----------------------------------------------------------------------------#
@@ -127,7 +131,7 @@ qp_clean_vars <- function(data,
 
   data %<>%
     dplyr::select(-n_est) %>%
-    dplyr::left_join(df %>%
+    dplyr::left_join(data %>%
                 dplyr::distinct(firm, estab_id, year) %>%
                 dplyr::count(firm, year, name = "n_est"),
               by = c("firm", "year"))

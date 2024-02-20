@@ -4,14 +4,38 @@
 \alias{qp_clean_vars}
 \title{Clean several variables in QP}
 \usage{
-qp_clean_vars(data)
+qp_clean_vars(
+  data,
+  df_cpi = data("INE_month_IHPC", envir = environment()),
+  df_mw = data("minimum_wage", envir = environment())
+)
+}
+\arguments{
+\item{data}{A tibble with assembled QP data}
+
+\item{df_cpi}{A dataset with cpi data (montly).}
+
+\item{df_mw}{A dataset with the values for yearly minimum wage}
+}
+\value{
+A cleaned QP dataset.
 }
 \description{
-This function cleans the following varaibles:
+This function cleans the following variables:
 \itemize{
-\item male
-\item age
+\item male. Because of inconsistencies within workers, apply a mode.
+\item age (see function)
 \item nationality (work in progress)
-\item wages
+\item wages (see function)
+\item Add Inflation (cpi). QP is collected from march to march, until 93. After 93, it has been collected in October. Thus, I must compute the CPI from monthly inflation data. INE has montly series.
+\item Add the minimum wage. Minimum wage for QP is 505 in 2014 (must be changed). QP was collected in October 2014, the change in September of that year of the MW is already binding for that year data. All other years have the MW raised on January 1st. In the first years, the MW is not binding for all (see my thesis). Younger people and people in agriculture must be accounted for.
+\item Tenure (see function)
+\item Firm size from observed size (number of workers.)
+\item Establishment size
+\item Number of establishments
+\item Promotion Variable (see function)
+\item Remove attributes
+\item remove year NAs
+\item Remove IRCTs that INE classifies as invalids
 }
 }

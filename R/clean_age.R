@@ -62,7 +62,7 @@ clean_age <- function(data) {
   # if tolerance was given, make it extendable to the censored years
 
   data %<>%
-    dplyr::mutate(age_aux = case_when(
+    dplyr::mutate(age_aux = dplyr::case_when(
       most_before == 0 & year <= 1993 & (as.numeric(age) + 1 == (year - yob_mode)) ~ as.numeric(age),
       most_before == 1 & year >= 1994 & (as.numeric(age) - 1 == (year - yob_mode)) ~ as.numeric(age),
       age == "<=17" & most_before == 0 & worker %in% vec_workers_tol ~ (year - yob_mode + 1),

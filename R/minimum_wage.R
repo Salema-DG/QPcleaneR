@@ -14,14 +14,12 @@
 #' @source {
 #' Pordata
 #' Code used to alter it:
-#'
-#' # load data
-#'
+#' 1st load data
+#' the the code to alter it from pordata:
 #' minimum_wage %<>%
 #' dplyr::rename(nominal_mw = "sm",
 #'               year ="anos")
-#'
 #'    }
 #' @examples
 #' data(minimum_wage) # lazy loading. The RAM will not be immediately occupied.
-"minimum_wage "
+"minimum_wage"

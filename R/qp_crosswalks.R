@@ -57,7 +57,7 @@ qp_crosswalks <- function(data) {
   # year founded has the month for some observations (in the format yyyymm).
   # keep only the year
   data %<>%
-    dplyr::mutate(year_funded = year_funded %>% as.integer() %>% tidyr::na_if(0)) %>%
+    dplyr::mutate(year_funded = year_funded %>% as.integer() %>% dplyr::na_if(0)) %>%
     dplyr::mutate(year_founded = dplyr::case_when(
       year_funded < 300000 & year_funded > 100000 ~ (year_funded%/%100),
       TRUE ~ year_funded

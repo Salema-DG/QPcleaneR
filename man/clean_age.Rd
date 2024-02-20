@@ -6,6 +6,12 @@
 \usage{
 clean_age(data)
 }
+\arguments{
+\item{data}{A tibble}
+}
+\value{
+A tibble with a cleaned variable named age
+}
 \description{
 There are several problems with the age variable that are solved with this function.
 \enumerate{
@@ -13,4 +19,8 @@ There are several problems with the age variable that are solved with this funct
 \item There are yearly inconsistencies
 \item Censoring at high and low ages (<= 17 e >= 68)
 }
+
+Solution: Do a max mode for the years of birth and fill in the mistakes.
+This algorithm must account for the fact that the month of reference was march in 1993 and before;
+and October in 94 on forward.
 }

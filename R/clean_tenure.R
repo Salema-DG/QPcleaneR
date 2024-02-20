@@ -22,36 +22,36 @@ clean_tenure <- function(data) {
   #-----------------------------------#
 
   data %<>%
-    mutate(
+    dplyr::mutate(
       # non valid adm_dates will be NA's
       adm_date =
-        case_when(
+        dplyr::case_when(
           # valid dates have at least 6 digits and
-          str_length(adm_date) >= 6 &
+          stringr::str_length(adm_date) >= 6 &
             # should start with one of the following characters
             grepl('^1|^2|^J|^F|^M|^A|^J|^S|^O|^N|^D',adm_date) ~ adm_date )) %>%
-    mutate(
-      tenure = case_when(
+    dplyr::mutate(
+      tenure = dplyr::case_when(
         year <= 1993 &
           adm_date %>%
-          str_length() == 6 ~ #850540
+          stringr::str_length() == 6 ~ #850540
           # compute the estimated number of days since admission (report month is march)
           (lubridate::my(paste0("03", year)) - lubridate::ym(adm_date)) %>%
           as.numeric(),
         year > 1993 & year <= 2009 &
-          str_length(adm_date) == 6 ~
+          stringr::str_length(adm_date) == 6 ~
           # (report month is oct)
           (lubridate::my(paste0("10", year)) - lubridate::ym(adm_date)) %>%
           as.numeric(),
         year >= 2010 & year <= 2019 &
-          str_length(adm_date) == 8 ~
+          stringr::str_length(adm_date) == 8 ~
           # (report month is oct)
           (lubridate::my(paste0("10", year)) -
              as.Date(paste0(adm_date, "/01") ,format='%b %Y/%d')) %>%
           as.numeric(),
         year >= 2020 &
           adm_date %>%
-          str_length() == 10 ~
+          stringr::str_length() == 10 ~
           # (report month is oct)
           (lubridate::my(paste0("10", year)) - lubridate::ymd(
             # convert the adm to conventional date format after 2020
@@ -61,23 +61,23 @@ clean_tenure <- function(data) {
         TRUE ~ NA
       )) %>%
     # the diff is in days and needs one more month
-    mutate(tenure = ((tenure/30) %>%
+    dplyr::mutate(tenure = ((tenure/30) %>%
                        round())+1 )
 
 
   # complement tenure with antig
   data %<>%
-    mutate(antig = 12*antig) %>%
-    mutate(tenure = case_when(
+    dplyr::mutate(antig = 12*antig) %>%
+    dplyr::mutate(tenure = dplyr::case_when(
       # if tenure is negative and antig >= 0, keep antig
       tenure < 0 & !is.na(antig) & antig >= 0 ~ antig,
       # otherwise, keep tenure
       tenure >= 0 ~ tenure
       # leave NA's for tenure that does not fit in with any of this criteria
     )) %>%
-    mutate(
+    dplyr::mutate(
       tenure = tenure %>%
-        coalesce(antig))
+        dplyr::coalesce(antig))
 
   return(data)
 

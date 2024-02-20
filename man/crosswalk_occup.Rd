@@ -8,8 +8,8 @@ crosswalk_occup(
   data,
   year_column,
   original_occup_3d,
-  crosswalk_80_94 = data("occup_crosswalk_80_94"),
-  crosswalk_10_94 = data("occup_crosswalk_10_94")
+  crosswalk_80_94 = data("occup_crosswalk_80_94", envir = environment()),
+  crosswalk_10_94 = data("occup_crosswalk_10_94", envir = environment())
 )
 }
 \arguments{

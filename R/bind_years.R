@@ -5,6 +5,8 @@
 #'
 #' @param data A list of dataframes. Each element is a year dataset, containing info on workers, firms and establishment.
 #'
+#' @export
+#'
 #' @return The raw dataset (a tibble).
 #'
 bind_years <- function(data) {
