@@ -4,13 +4,7 @@
 \alias{crosswalk_occup}
 \title{Occupation Crosswalk}
 \usage{
-crosswalk_occup(
-  data,
-  year_column,
-  original_occup_3d,
-  crosswalk_80_94 = data("occup_crosswalk_80_94", envir = environment()),
-  crosswalk_10_94 = data("occup_crosswalk_10_94", envir = environment())
-)
+crosswalk_occup(data, year_column, original_occup_3d)
 }
 \arguments{
 \item{data}{A tibble with an assembled QP.}
@@ -35,4 +29,10 @@ There are 3 occupation classifications in the pediod of the full QP:\tabular{ll}
    CNP 94 \tab (1995-2009) \cr
    CPP 2010 \tab (2010-today) \cr
 }
+
+
+In the classification of 1985, there are leters for people without a clear occup.
+A1111 means "ajudante residual", A333 means auxiliar profissional, etc.
+This leters don't reflect the occupation, but yes the qualification.
+Thus, they are left out. (as NA)
 }

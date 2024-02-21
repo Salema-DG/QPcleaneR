@@ -11,6 +11,7 @@
 #'
 #' @return A tibble with duplicates selected. If type is set to "continuity" or "highest", there is also the column "w_g", indicating if that observation would have been eliminated using "all".
 #'
+#' @export
 #'
 
 delete_worker_duplicates <- function(data,
@@ -21,16 +22,16 @@ delete_worker_duplicates <- function(data,
   }
 
   # turn data into a lazy_dt, to use dtplyr
-  lazy_dt_data <- data %>%
-    dtplyr::lazy_dt()
+  # lazy_dt_data <- data %>%
+  #   dtplyr::lazy_dt()
 
   # identify the duplicates
-  df_freq <- lazy_dt_data %>%
-    dplyr::count(worker, year) %>%
-    dplyr::mutate(w_g= dplyr::case_when(
-      n > 1 ~ 1,
-      n == 1 ~ 0
-    ))
+  # df_freq <- lazy_dt_data %>%
+  #   dplyr::count(worker, year) %>%
+  #   dplyr::mutate(w_g= dplyr::case_when(
+  #     n > 1 ~ 1,
+  #     n == 1 ~ 0
+  #   ))
 
   if (type == "continuity") {
 
@@ -40,14 +41,14 @@ delete_worker_duplicates <- function(data,
 
   if (type == "highest") {
 
-    data <- lazy_dt_data %>%
+    data <- data %>%
       dplyr::group_by(worker, year) %>%
       dplyr::slice_max(base_wage,
                 n=1) %>%
       dplyr::slice_max(normal_hours,
                 n=1) %>%
       dplyr::ungroup() %>%
-      dplyr::distinct(worker, year, normal_hours, base_wage, .keep_all=TRUE) %>%
+      dplyr::distinct(worker, year, normal_hours, base_wage, .keep_all=TRUE) %>% #nothing reaches this stage
       tibble::as_tibble()
 
     return(data)

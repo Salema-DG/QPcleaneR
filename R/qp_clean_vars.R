@@ -27,11 +27,20 @@
 #' @return A cleaned QP dataset.
 #'
 
-qp_clean_vars <- function(data,
-                          df_cpi = data("INE_month_IHPC",
-                                        envir = environment()),
-                          df_mw = data("minimum_wage",
-                                       envir = environment())) {
+qp_clean_vars <- function(data#,
+                          #df_cpi = data("INE_month_IHPC",
+                          #              envir = environment()),
+                          #df_mw = data("minimum_wage",
+                          #             envir = environment())
+                          ) {
+
+  data("INE_month_IHPC",
+       envir = environment())
+  data("minimum_wage",
+       envir = environment())
+  df_cpi <- INE_month_IHPC
+  df_mw <- minimum_wage
+
 
   #----------------------------------------------------------------------------#
   # Male ####
@@ -47,7 +56,6 @@ qp_clean_vars <- function(data,
               by = "worker")
 
   # Change the variable to binary (1 if man, 0 if woman)
-
   data %<>%
     dplyr::mutate(male = dplyr::case_when(
       male == 1 ~ 1,
@@ -110,8 +118,9 @@ qp_clean_vars <- function(data,
 
   #----------------------------------------------------------------------------#
   # Tenure ####
-
+  suppressWarnings({
   data %<>% clean_tenure()
+  })
 
   #----------------------------------------------------------------------------#
   # Firm size ####
@@ -138,10 +147,10 @@ qp_clean_vars <- function(data,
 
   #----------------------------------------------------------------------------#
   # Promotions ####
-
+  suppressWarnings({
   data %<>%
     clean_promotions()
-
+  })
   #----------------------------------------------------------------------------#
   # Remove NA in year ####
 

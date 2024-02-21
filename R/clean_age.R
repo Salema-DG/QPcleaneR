@@ -39,6 +39,7 @@ clean_age <- function(data) {
     dplyr::group_by(worker) %>%
     dplyr::summarise(most_before = a %>% mean() %>% round())
 
+
   df_yob %<>%
     dplyr::left_join(df_most_before,
                      by = "worker")
@@ -50,6 +51,8 @@ clean_age <- function(data) {
                      by = "worker")
 
   #sinalize the individuals that will get "tolerancia"
+  # there are warnings passing age to numeric
+  suppressWarnings({
   vec_workers_tol <- data %>%
     dplyr::filter(most_before == 0 & year <= 1993 & (as.numeric(age) + 1 == (year - yob_mode)) |
              most_before == 1 & year >= 1994 & (as.numeric(age) - 1 == (year - yob_mode))) %>%
@@ -69,6 +72,7 @@ clean_age <- function(data) {
       age == ">=68" & most_before == 1 & worker %in% vec_workers_tol ~ (year - yob_mode - 1),
       TRUE ~ (year - yob_mode)
     ))
+  })
 
   data %<>%
     dplyr::select(-age) %>%

@@ -39,8 +39,11 @@ qp_crosswalks <- function(data) {
       TRUE ~ worker
     ))
 
-  #worker ID should be an integer
-  data$worker %<>% as.integer()
+  #worker ID should be an integer. But it can't, because there are numbers that
+  # are very high and cannot be turned into an integer.
+  # Thus, I'll leave it as a numeric and be warned about issues when saving
+  #data$w2 <- data$worker %>% as.integer()
+
 
   # worker ID cannot be this small
   data %<>% dplyr::filter(worker > 100)
@@ -87,8 +90,12 @@ qp_crosswalks <- function(data) {
   #-----------------------#
 
   #turn the 4d original occup varaible into a 3d
+  # this creates NAs in the residuals caterogies of the 1985 classification.
+  # it's correct this way
+  suppressWarnings({
   data %<>%
     dplyr::mutate(occup_3d = as.numeric(occup_4d)%/%10)
+  })
 
   data %<>%
     crosswalk_occup(year_column = year,

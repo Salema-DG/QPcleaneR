@@ -4,11 +4,7 @@
 \alias{qp_clean_vars}
 \title{Clean several variables in QP}
 \usage{
-qp_clean_vars(
-  data,
-  df_cpi = data("INE_month_IHPC", envir = environment()),
-  df_mw = data("minimum_wage", envir = environment())
-)
+qp_clean_vars(data)
 }
 \arguments{
 \item{data}{A tibble with assembled QP data}
