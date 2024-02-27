@@ -17,4 +17,24 @@ The goal of creating lag and lead variables is to avoid classifying them
 after the restrictions. That is, if the goal is to know if a worker
 separated, we should do it before the elimination of maternity,
 for example.
+
+Firm status. Create several variables:
+\itemize{
+\item lag_firm: the last year that firm appeared
+\item lead_firm: the following year that firm appeared
+\item firm_open: it's 1 if the firm never appeared before
+\item firm_close: it's 1 if the firm never appeared again
+\item firm_gap_behind: the last year the firm appeared was not last year
+\item firm_gap_forward: the next year the firm appears is not next year
+}
+
+Worker status.
+\itemize{
+\item lag_worker. Last year the worker was in QP
+\item lead_worker. Next year the worker will be in QP
+\item lag_worker_firm. last firm the worker was in QP.
+\item lead_worker_firm. Next firm the worker is in QP.
+\item separation: worker is not in the current firm next year
+\item hiring: worker was not in the current firm last year
+}
 }
