@@ -74,7 +74,7 @@ qp_clean_vars <- function(data#,
 
   data %<>% clean_age()
 
-  if (!all( data$worker == vec_worker )) {
+  if ( (data %>% count(worker, year) %>% filter(n != 1) %>% nrow()) != 0 ) {
     stop("Stop 2")
   }
 
