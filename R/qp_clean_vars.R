@@ -99,6 +99,9 @@ qp_clean_vars <- function(data#,
                 dplyr::select(year, cpi),
               by = "year")
 
+  # eliminar
+  vec_worker <- data$worker
+
   #----------------------------------------------------------------------------#
   # Minimum wage
 
@@ -183,6 +186,8 @@ qp_clean_vars <- function(data#,
 
   data %<>% dplyr::filter(!is.na(year))
 
+  # eliminar
+  vec_worker <- data$worker
 
   #----------------------------------------------------------------------------#
   # Remove attributes ####
