@@ -29,7 +29,8 @@ clean_age <- function(data) {
     dplyr::mutate(age = age %>% as.numeric()) %>%
     dplyr::mutate(yob = year - age) %>%
     dplyr::group_by(worker) %>%
-    dplyr::summarize(yob_mode = yob %>% QPanalyseR::modes())
+    dplyr::summarize(yob_mode = yob %>% QPanalyseR::modes(untie = "max"))
+  # coloquei este "max à pressa". Pensar para ver se faz sentido.
 
   # because after 93 it's collected in October and before it's collected in March
   # I will make a notebook on whether there is more years before or after
