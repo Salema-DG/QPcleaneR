@@ -12,6 +12,8 @@
 #'
 #' @return A tibble with the variable tenure.
 #'
+#' @export
+#'
 
 
 clean_tenure <- function(data) {

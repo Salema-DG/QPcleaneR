@@ -34,6 +34,9 @@ qp_clean_vars <- function(data#,
                           #             envir = environment())
                           ) {
 
+  # eliminar
+  vec_worker <- data$worker
+
   data("INE_month_IHPC",
        envir = environment())
   data("minimum_wage",
@@ -62,10 +65,18 @@ qp_clean_vars <- function(data#,
       male == 2 ~ 0
     ))
 
+  if (!all( data$worker == vec_worker )) {
+    stop("Stop 1")
+  }
+
   #----------------------------------------------------------------------------#
   # Age ####
 
   data %<>% clean_age()
+
+  if (!all( data$worker == vec_worker )) {
+    stop("Stop 2")
+  }
 
   #----------------------------------------------------------------------------#
   # Nationality ####
@@ -111,16 +122,28 @@ qp_clean_vars <- function(data#,
   # Also, the agricultural MW was smaller. But this is not relevant for QP,
   # this sector is usually eliminated.
 
+  if (!all( data$worker == vec_worker )) {
+    stop("Stop 3")
+  }
+
   #----------------------------------------------------------------------------#
   # Wages ####
 
   data %<>% clean_wages()
+
+  if (!all( data$worker == vec_worker )) {
+    stop("Stop 4")
+  }
 
   #----------------------------------------------------------------------------#
   # Tenure ####
   suppressWarnings({
   data %<>% clean_tenure()
   })
+
+  if (!all( data$worker == vec_worker )) {
+    stop("Stop 5")
+  }
 
   #----------------------------------------------------------------------------#
   # Firm size ####
@@ -151,6 +174,10 @@ qp_clean_vars <- function(data#,
   data %<>%
     clean_promotions()
   })
+
+  if (!all( data$worker == vec_worker )) {
+    stop("Stop 6")
+  }
   #----------------------------------------------------------------------------#
   # Remove NA in year ####
 
@@ -179,6 +206,10 @@ qp_clean_vars <- function(data#,
 
   #----------------------------------------------------------------------------#
   # Return ####
+
+  if (!all( data$worker == vec_worker )) {
+    stop("Stop 7")
+  }
 
   return(data)
 

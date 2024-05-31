@@ -16,6 +16,8 @@
 #'
 #' @return A tibble with a cleaned variable named age
 #'
+#' @export
+#'
 
 
 clean_age <- function(data) {

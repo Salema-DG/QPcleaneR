@@ -16,6 +16,8 @@
 #'
 #' @return A tibble with cleaned wage variables
 #'
+#' @export
+#'
 #'
 
 clean_wages <- function(data) {

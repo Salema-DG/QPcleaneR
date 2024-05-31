@@ -10,6 +10,8 @@
 #'
 #' @return A tibble with cleaned QD data.
 #'
+#' @export
+#'
 
 clean_promotions <- function(data) {
 
