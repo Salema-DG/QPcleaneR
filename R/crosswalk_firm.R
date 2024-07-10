@@ -89,7 +89,8 @@ crosswalk_firm <- function(data) {
   # Step 4
   data %<>%
     dplyr::mutate(firm = dplyr::case_when(
-      firm %in% vec_firm_aux & year >= 2010 ~ firm*100, # add two 0
+      # make the same number start with 1
+      firm %in% vec_firm_aux & year >= 2010 ~ firm - 400000000,
       TRUE ~ firm
     ))
 
